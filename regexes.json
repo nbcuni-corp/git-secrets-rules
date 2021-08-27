@@ -1,0 +1,5 @@
+{
+  "draw.io": "regex:host=\"www.draw.io\".*",
+  "eTag": "regex:ETag.*",
+  "commit": "regex:commit [\\\\d\\\\w]{40}"
+}
