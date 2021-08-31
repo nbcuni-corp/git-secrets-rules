@@ -57,6 +57,6 @@ if __name__ == '__main__':
   parser.add_argument('--region', '-r', type=str, help='Region the AWS resources are in.', default='us-east-1')
   parser.add_argument('--file', '-f', type=str, help='Filename with the trufflehog results in JSON format', required=True)
   parser.add_argument('--elapsed-time', type=int, help='Total elasped scanning time in seconds', required=True)
-  parser.add_argument('--git-diff', type=int, help='git diff --stat summary', required=True)
+  parser.add_argument('--git-diff', type=str, help='git diff --stat summary', required=True)
   args = parser.parse_args()
   main(args.region, args.file, args.elapsed_time, args.git_diff)
