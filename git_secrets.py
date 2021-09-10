@@ -13,7 +13,7 @@ import os
 import re
 
 def parse_git_diff(git_diff):
-    m = re.findall(r'(\d) files? changed(?:, (\d) insertion\(\+\))?(?:, (\d) deletion\(-\))?', git_diff)
+    m = re.findall(r'(\d) files? changed(?:, (\d) insertions?\(\+\))?(?:, (\d) deletions?\(-\))?', git_diff)
     if not m:
         return 0, 0
     else:
