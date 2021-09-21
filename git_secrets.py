@@ -22,7 +22,7 @@ def parse_git_diff(git_diff):
     lines_scanned = int(m[1] if m[1] else 0) + int(m[2] if m[2] else 0)
     return files_scanned, lines_scanned
 
-def main(region, filename, elapsed_time, git_diff):
+def main(region, filename, elapsed_time, git_diff, owner):
     session = boto3.Session(
         region_name=region,
         aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
@@ -41,6 +41,7 @@ def main(region, filename, elapsed_time, git_diff):
             data['elapsed_time'] = elapsed_time
             data['lines_scanned'] = lines_scanned
             data['files_scanned'] = files_scanned
+            data['owner'] = owner
             try:
                 table.put_item(
                     Item=data,
@@ -58,5 +59,6 @@ if __name__ == '__main__':
   parser.add_argument('--file', '-f', type=str, help='Filename with the trufflehog results in JSON format', required=True)
   parser.add_argument('--elapsed-time', type=int, help='Total elasped scanning time in seconds', required=True)
   parser.add_argument('--git-diff', type=str, help='git diff --stat summary', required=True)
+  parser.add_argument('--owner', type=str, help='owner/repository', required=True)
   args = parser.parse_args()
-  main(args.region, args.file, args.elapsed_time, args.git_diff)
+  main(args.region, args.file, args.elapsed_time, args.git_diff, args.owner)
