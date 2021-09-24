@@ -33,9 +33,8 @@ def main(region, filename, elapsed_time, git_diff, owner):
     with open(filename, 'r') as f:
         for line in f:
             data = json.loads(line)
-            uuid = data['branch']+data['commitHash']+''.join(sorted(data['stringsFound']))
             data['uuid'] = hashlib.sha256(bytes(
-                uuid,
+                line,
                 'utf-8'
             )).hexdigest()
             data['elapsed_time'] = elapsed_time
